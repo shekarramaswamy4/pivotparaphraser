@@ -4,7 +4,7 @@ import json
 import argparse
 
 URL = 'https://translation.googleapis.com/language/translate/v2'
-API_KEY = 'XXX'
+API_KEY = 'AIzaSyDNIKiNYwSS_f1g06DbDz0O8JcSVSJdmbc'
 
 # Please note that there is no input checking for language codes.
 # Full list of supported languages can be found at https://cloud.google.com/translate/docs/languages
@@ -29,7 +29,8 @@ class PivotParaphraser:
         else:
             formatted = 'u\'' + cur_query + '\''
             formatted = cur_query.encode('utf8')
-            file.write(formatted + '\n')
+            newlineFormat = '\n'.encode('utf8')
+            file.write(formatted + newlineFormat)
             return cur_query
 
     def fileTranslation(self, inFile, outFile, languages):
@@ -40,7 +41,7 @@ class PivotParaphraser:
             # no error checking for out file
             count = 0
             total_lines = 0
-            outF = open(outFile, "w+") if outFile != '' else ''
+            outF = open(outFile, "wb+") if outFile != '' else ''
             for line in lines:
                 total_lines += 1
                 returned = self.singleTranslation(line, languages, outF)
