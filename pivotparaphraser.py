@@ -40,15 +40,18 @@ class PivotParaphraser:
             lines = inF.readlines()
 
             # no error checking for out file
-            count = 0
+            # count = 0
             total_lines = 0
             outF = open(outFile, "wb+") if outFile != '' else ''
             for line in lines:
                 total_lines += 1
                 returned = self.singleTranslation(line, languages, outF)
-                if (line == returned):
-                    count += 1
-            print(count / total_lines)
+                # if (line == returned):
+                #     count += 1
+                score = sentence_bleu([line.split(' ')], returned.split(' '))
+                print(score)
+            # print(count / total_lines)
+            print(total_lines)
         else:
             print('cannot open inFile')
             exit(1)
