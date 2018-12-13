@@ -2,9 +2,10 @@ import requests
 import sys
 import json
 import argparse
+from nltk.translate.bleu_score import sentence_bleu
 
 URL = 'https://translation.googleapis.com/language/translate/v2'
-API_KEY = 'AIzaSyDNIKiNYwSS_f1g06DbDz0O8JcSVSJdmbc'
+API_KEY = ''
 
 # Please note that there is no input checking for language codes.
 # Full list of supported languages can be found at https://cloud.google.com/translate/docs/languages
@@ -82,6 +83,6 @@ if __name__ == '__main__':
     lang_list = lang.split('|')
     p = PivotParaphraser()
     if (query != ''): # single translation
-        p.singleTranslation(query, lang_list)
+        p.singleTranslation(query, lang_list, '')
     else: # file translation
         p.fileTranslation(inFile, outFile, lang_list)
